@@ -33,7 +33,7 @@
 ### Ведущий (`forest331`)
 
 - создание репозитория и приглашение напарника;
-- настройка Vite + TypeScript + Vitest + ESLint + Prettier;
+- настройка Vite + TypeScript + Vitest + ESLint + Prettier + husky;
 - доска задач GitHub Projects;
 - корзина, промокод, расчёт суммы;
 - unit-тесты расчёта корзины;
