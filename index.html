@@ -1,13 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>temp-app</title>
+    <title>Полка — книжный магазин</title>
   </head>
   <body>
-    <div id="app"></div>
+    <header class="header">
+      <div class="logo">ПОЛКА</div>
+      <nav class="nav">
+        <a href="#/about" class="nav-link" id="nav-about">О нас</a>
+        <a href="#/catalog" class="nav-link" id="nav-catalog">Каталог</a>
+        <a href="#/cart" class="nav-link" id="nav-cart">Корзина (<span id="cart-count">0</span>)</a>
+      </nav>
+    </header>
+
+    <!-- Оставляем только пустые контейнеры для секций -->
+    <main class="main" id="app">
+      <section id="section-about" class="section hidden"></section>
+      <section id="section-catalog" class="section hidden"></section>
+      <section id="section-cart" class="section hidden"></section>
+    </main>
+
+    <footer class="footer">
+      <p>«Полка» — книжный магазин · GitHub: forest331, Ivan Konovalov · Учебный проект</p>
+    </footer>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
