@@ -1,0 +1,137 @@
+export interface Book {
+  id: number;
+  title: string;
+  author: string;
+  category: BookCategory;
+  price: number;
+  image: string;
+  description: string;
+}
+
+export enum BookCategory {
+  RussianClassic = 'Российская классика',
+  Fantasy = 'Фэнтези',
+}
+
+export const books: Book[] = [
+  {
+    id: 1,
+    title: 'Мертвые души',
+    author: 'Николай Гоголь',
+    category: BookCategory.RussianClassic,
+    price: 349,
+    image: '/images-book/Gogol-Mertvye_dushi.png',
+    description:
+      '«Мёртвые души: поэма» — сатирическая поэма о предприимчивом Чичикове и российском обществе, в котором за любезностью и хозяйственной хваткой скрываются корысть, бездействие и духовная пустота.',
+  },
+  {
+    id: 2,
+    title: 'Обломов',
+    author: 'Иван Гончаров',
+    category: BookCategory.RussianClassic,
+    price: 379,
+    image: '/images-book/Goncharov-Oblomov.png',
+    description:
+      '«Обломов» — социально-бытовой, психологический и философский роман о петербургском помещике, которому привычка к покою мешает отвечать на вызовы жизни.',
+  },
+  {
+    id: 3,
+    title: 'Горе от ума',
+    author: 'Александр Грибоедов',
+    category: BookCategory.RussianClassic,
+    price: 349,
+    image: '/images-book/Griboedov-Gore_ot_uma.png',
+    description:
+      '«Горе от ума» — комедия в стихах о столкновении независимого молодого дворянина с московским обществом, где ценят чины, богатство и умение угождать.',
+  },
+  {
+    id: 4,
+    title: 'Отцы и дети',
+    author: 'Иван Тургенев',
+    category: BookCategory.RussianClassic,
+    price: 359,
+    image: '/images-book/Turgenev-Ottsy_i_deti.png',
+    description:
+      '«Отцы и дети» — социально-психологический роман о конфликте поколений и убеждениях Евгения Базарова, который не признаёт авторитетов и отвергает привычные ценности.',
+  },
+  {
+    id: 5,
+    title: 'Мастер и Маргарита',
+    author: 'Михаил Булгаков',
+    category: BookCategory.RussianClassic,
+    price: 359,
+    image: '/images-book/Bulgakov-Master_i_Margarita.png',
+    description:
+      '«Мастер и Маргарита» — философско-сатирический роман о Воланде и его свите, чьё появление нарушает привычную жизнь Москвы 1930-х годов.',
+  },
+  {
+    id: 6,
+    title: 'Преступление и наказание',
+    author: 'Федор Достоевский',
+    category: BookCategory.RussianClassic,
+    price: 399,
+    image: '/images-book/Dostoevskiy-Prestuplenie_i_nakazanie.png',
+    description:
+      '«Преступление и наказание» — социально-психологический роман о Родионе Раскольникове и границе между свободой человека и нравственной ответственностью.',
+  },
+  {
+    id: 7,
+    title: 'Заводной апельсин',
+    author: 'Энтони Бёрджесс',
+    category: BookCategory.Fantasy,
+    price: 429,
+    image: '/images-book/Berdzhess-Zavodnoy_apelsin.png',
+    description:
+      '«Заводной апельсин» — роман-антиутопия о свободе выбора в обществе, где на жестокость преступников государство отвечает принудительным перевоспитанием.',
+  },
+  {
+    id: 8,
+    title: 'Проект "Аве Мария"',
+    author: 'Энди Вейер',
+    category: BookCategory.Fantasy,
+    price: 629,
+    image: '/images-book/Veyer-Proekt_Ave_Mariya.png',
+    description:
+      '«Проект «Аве Мария»» — научная фантастика о Райланде Грейсе, который просыпается один на борту межзвёздного корабля и должен понять, как спасти Землю от угасания Солнца.',
+  },
+  {
+    id: 9,
+    title: 'Повелитель мух',
+    author: 'Уильям Голдинг',
+    category: BookCategory.Fantasy,
+    price: 449,
+    image: '/images-book/Golding-Povelitel_mukh.png',
+    description:
+      '«Повелитель мух» — аллегорический роман о школьниках, которые после авиакатастрофы остаются на необитаемом острове и пытаются сохранить порядок без мира взрослых.',
+  },
+  {
+    id: 10,
+    title: 'О дивный новый мир',
+    author: 'Олдос Леонард Хаксли',
+    category: BookCategory.Fantasy,
+    price: 529,
+    image: '/images-book/Haksli-O_divnyy_novyy_mir.png',
+    description:
+      '«О дивный новый мир» — антиутопический роман о конфликте личной свободы и всеобщего счастья, за которое приходится платить отказом от индивидуальности.',
+  },
+  {
+    id: 11,
+    title: 'Трудно быть богом',
+    author: 'Борис Стругацкий, Аркадий Стругацкий',
+    category: BookCategory.Fantasy,
+    price: 449,
+    image: '/images-book/Strugatskiy-Trudno_byt_bogom.png',
+    description:
+      '«Трудно быть богом: фантастическая повесть» — научная фантастика о землянине Антоне, который под именем дона Руматы Эсторского живёт в средневековом Арканаре и пытается сохранить человечность там, где власть объявила войну образованию и свободомыслию.',
+  },
+  {
+    id: 12,
+    title: 'Мы',
+    author: 'Евгений Замятин',
+    category: BookCategory.Fantasy,
+    price: 339,
+    image: '/images-book/Zamyatin-My.png',
+    description:
+      '«Мы» — роман-антиутопия о столкновении человеческой личности с государством, которое считает свободу помехой всеобщему счастью.',
+  },
+];
