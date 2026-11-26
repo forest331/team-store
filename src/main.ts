@@ -1,5 +1,6 @@
 import './style.css';
 import { renderAboutPage } from './pages/about';
+import { renderCatalog } from './pages/catalog';
 const routes = ['about', 'catalog', 'cart'];
 
 function navigate() {
@@ -18,6 +19,7 @@ function navigate() {
     // Вызываем рендер при переходе на страницу
     if (hash === 'about') renderAboutPage();
     // Для catalog и cart рендер сделаем позже, когда будут данные
+    if (hash === 'catalog') renderCatalog();
   }
 
   document.querySelectorAll('.nav-link').forEach((el) => el.classList.remove('active'));
