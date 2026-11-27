@@ -23,9 +23,9 @@ export function createBookCard(book: Book): HTMLElement {
   addButton.dataset.id = String(book.id);
 
   addButton.addEventListener('click', (event) => {
-  event.stopPropagation();
-  // Позже добавим логику добавления в корзину
-});
+    event.stopPropagation();
+    // Позже добавим логику добавления в корзину
+  });
 
   card.addEventListener('click', (event) => {
     const target = event.target as HTMLElement;
