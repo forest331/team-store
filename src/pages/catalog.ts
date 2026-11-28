@@ -1,5 +1,6 @@
-import { books, Book } from '../data/books';
+import { books, Book, BookCategory } from '../data/books';
 import { createElement } from '../utils/dom';
+import { applyBookFilters, FilterState, SortDirection } from '../utils/filters';
 
 export function createBookCard(book: Book): HTMLElement {
   const card = createElement('li', 'catalog__card card');
@@ -46,18 +47,134 @@ export function renderCatalog(): void {
 
   section.replaceChildren();
 
+  const state: FilterState = {
+    search: '',
+    category: 'all',
+    minPrice: null,
+    maxPrice: null,
+    sort: 'default',
+  };
+
   const title = createElement('h2', 'catalog__title', 'Каталог книг');
 
   const catalogWrapper = createElement('div', 'catalog__wrapper');
-  const catalog = createElement('ul', 'catalog__list');
 
-  books.forEach((book) => {
-    const card = createBookCard(book);
-    catalog.append(card);
+  const controls = createElement('div', 'catalog__controls controls');
+
+  const searchInput = createElement('input', 'controls__input controls__input--search');
+  searchInput.type = 'text';
+  searchInput.placeholder = 'Поиск по названию...';
+
+  const categorySelect = createElement('select', 'controls__select');
+  const allOption = createElement('option', '', 'Все категории');
+  allOption.value = 'all';
+  categorySelect.append(allOption);
+
+  Object.values(BookCategory).forEach((category) => {
+    const option = createElement('option', '', `${category}`);
+    option.value = category;
+    categorySelect.append(option);
   });
 
-  catalogWrapper.append(title, catalog);
+  const priceGroup = createElement('div', 'controls__price-group');
+  const minPriceInput = createElement('input', 'controls__input controls__price');
+  minPriceInput.type = 'number';
+  minPriceInput.min = '0';
+  minPriceInput.placeholder = 'Цена от';
+
+  const maxPriceInput = createElement('input', 'controls__input controls__price');
+  maxPriceInput.type = 'number';
+  maxPriceInput.min = '0';
+  maxPriceInput.placeholder = 'Цена до';
+
+  priceGroup.append(minPriceInput, maxPriceInput);
+
+  const sortSelect = createElement('select', 'controls__select');
+
+  const sortOptions: { value: SortDirection; label: string }[] = [
+    { value: 'default', label: 'По умолчанию' },
+    { value: 'asc', label: 'Сначала дешевле' },
+    { value: 'desc', label: 'Сначала дороже' },
+  ];
+
+  sortOptions.forEach(({ value, label }) => {
+    const option = createElement('option', '', `${label}`);
+    option.value = value;
+    sortSelect.append(option);
+  });
+
+  const resetButton = createElement('button', 'controls__reset', 'Сбросить');
+  resetButton.type = 'button';
+
+  controls.append(searchInput, categorySelect, priceGroup, sortSelect, resetButton);
+
+  const catalog = createElement('ul', 'catalog__list');
+
+  const updateCatalogList = () => {
+    catalog.replaceChildren();
+    const filteredBooks = applyBookFilters(books, state);
+
+    if (filteredBooks.length === 0) {
+      const emptyMessage = createElement(
+        'li',
+        'catalog__empty',
+        'По вашему запросу книги не найдены. Попробуйте изменить параметры фильтра или сбросить их.',
+      );
+      catalog.append(emptyMessage);
+      return;
+    }
+
+    filteredBooks.forEach((book) => {
+      const card = createBookCard(book);
+      catalog.append(card);
+    });
+  };
+
+  searchInput.addEventListener('input', () => {
+    state.search = searchInput.value;
+    updateCatalogList();
+  });
+
+  categorySelect.addEventListener('change', () => {
+    state.category = categorySelect.value;
+    updateCatalogList();
+  });
+
+  minPriceInput.addEventListener('input', () => {
+    state.minPrice = minPriceInput.value === '' ? null : Number(minPriceInput.value);
+    updateCatalogList();
+  });
+
+  maxPriceInput.addEventListener('input', () => {
+    state.maxPrice = maxPriceInput.value === '' ? null : Number(maxPriceInput.value);
+    updateCatalogList();
+  });
+
+  sortSelect.addEventListener('change', () => {
+    state.sort = sortSelect.value as SortDirection;
+    updateCatalogList();
+  });
+
+  resetButton.addEventListener('click', () => {
+    state.search = '';
+    state.category = 'all';
+    state.minPrice = null;
+    state.maxPrice = null;
+    state.sort = 'default';
+
+    searchInput.value = '';
+    categorySelect.value = 'all';
+    minPriceInput.value = '';
+    maxPriceInput.value = '';
+    sortSelect.value = 'default';
+
+    updateCatalogList();
+  });
+
+  catalogWrapper.append(title, controls, catalog);
   section.append(catalogWrapper);
+
+  updateCatalogList();
 }
 
 export function openBookModal(book: Book): void {
